@@ -1,4 +1,4 @@
-FROM python AS base
+FROM python:3.9.2-alpine3.13 AS base
 ARG APP_DIR=/usr/app/
 USER root
 RUN mkdir ${APP_DIR}

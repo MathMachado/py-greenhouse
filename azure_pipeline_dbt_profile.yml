@@ -1,0 +1,37 @@
+# !! Default env variables set so that they can be omitted when
+# !! they are not required, as dbt always expects fully populated
+# !! profile configuration.
+
+infinitas_dwh:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: infinitaslearning.west-europe.azure
+      user: dev_azure_pipeline
+      password: "{{ env_var('DBT_PASSWORD', 'NOT_SET') }}"
+      role: "{{ env_var('DBT_ROLE', 'NOT_SET') }}"
+      database: "dev_warehouse"
+      warehouse: automation
+      schema: dev
+      threads: 4
+    prod:
+      type: snowflake
+      account: infinitaslearning.west-europe.azure
+      user: prod_azure_pipeline
+      password: "{{ env_var('DBT_PASSWORD', 'NOT_SET') }}"
+      role: "{{ env_var('DBT_ROLE', 'NOT_SET') }}"
+      database: "prod_warehouse"
+      warehouse: automation
+      schema: prod
+      threads: 4
+    acc:
+      type: snowflake
+      account: infinitaslearning.west-europe.azure
+      user: acc_azure_pipeline
+      password: "{{ env_var('DBT_PASSWORD', 'NOT_SET') }}"
+      role: "{{ env_var('DBT_ROLE', 'NOT_SET') }}"
+      database: "acc_warehouse"
+      warehouse: automation
+      schema: acc
+      threads: 4

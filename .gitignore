@@ -25,6 +25,10 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+target/
+dbt_modules/
+logs/
+.vscode/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

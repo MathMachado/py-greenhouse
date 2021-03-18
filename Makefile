@@ -80,3 +80,33 @@ debug:
 release:
 	git tag -a $(VERSION) -m "VERSION=$(VERSION) read from `version.toml`"
 	git push origin HEAD:dev tag $(VERSION)
+
+compile:
+	poetry run dbt compile
+
+test:
+	poetry run dbt test
+
+install:
+	@echo installing Dependencies
+	poetry install
+	poetry run dbt deps
+	poetry run whippet --assume-yes
+
+gatekeeper:
+	poetry run python -u bin/gatekeeper.py
+
+black:
+	poetry run black --check .
+
+pre-push: gatekeeeper
+
+lint: black
+	poetry run sqlfluff lint
+
+pre-commit: black
+ifdef staged
+	poetry run sqlfluff lint $(staged)
+endif
+
+.PHONY: black compile gatekeeper install lint merge merge-acc merge-prod pre-commit pre-push run snapshot test

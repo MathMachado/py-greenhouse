@@ -1,0 +1,18 @@
+[sqlfluff]
+dialect = snowflake
+templater = jinja
+
+[sqlfluff:templater:jinja:macros]
+group_by = {% macro group_by(n) -%}GROUP BY {{n}}{%- endmacro %}
+source = {% macro source(schema, table) -%}{{ schema }}.{{ table }}{%- endmacro %}
+surrogate_key = {% macro surrogate_key(fields) -%}{{ fields[0] }}{%- endmacro %}
+ns_not_deleted = {% macro ns_not_deleted(table) -%}{{table}}.deleted{%- endmacro %}
+sf_not_deleted = {% macro sf_not_deleted(table) -%}{{table}}.deleted{%- endmacro %}
+
+[sqlfluff:rules:L010]
+capitalisation_policy = upper
+
+[sqlfluff:rules:L016]
+max_line_length = 100
+tab_space_size = 4
+indent_unit = space

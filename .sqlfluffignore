@@ -1,5 +1,0 @@
-dbt_modules/
-macros/
-scripts/
-snapshots/
-target/
